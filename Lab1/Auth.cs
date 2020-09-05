@@ -9,34 +9,65 @@ using System.Text.Json.Serialization;
 namespace Auth
 	{
 
-	class AuthResponce
+	class AuthResponse
 		{
 		public string Message { get; protected set; }
+
 		public int ID { get; protected set; }
 
-		public AuthResponce (int _id, string _message)
+		public UserEntry UserData { get; protected set; }
+
+		public AuthResponse (int id, string message, UserEntry user)
 			{
-			ID = _id;
-			Message = _message;
+			ID = id;
+			Message = message;
+			UserData = user;
 			}
+
+		public AuthResponse (int id, string message) : this(id, message, null)
+			{
+			}
+
 		}
 
 
 	public class UserEntry
 		{
 		[JsonPropertyName("login")]
-		public string Login { get; protected set; }
+		public string Login { get;  set; }
 
 		[JsonPropertyName("password")]
-		public string Password { get; protected set; }
+		public string Password { get; set; }
 
-		[JsonPropertyName("rule")]
-		public string Rule { get; protected set; }
+		[JsonPropertyName("banned")]
+		public bool IsBanned { get;  set; }
 
-		public UserEntry (string _login, string _password)
+		[JsonPropertyName("restrict")]
+		public bool RestrictPassword { get;  set; }
+
+		[JsonPropertyName("rule")] // Admin, User
+		public string Rule { get;  set; }
+
+		public UserEntry ()
 			{
-			Login = _login;
-			Password = _password;
+			Login = "blank";
+			Password = "blank";
+			Rule = "blank";
+			IsBanned = false;
+			RestrictPassword = false;
+
+			}
+		public UserEntry (string login, string password, string rule, bool banned, bool restrict)
+			{
+			Login = login;
+			Password = password;
+			Rule = rule;
+			IsBanned = banned;
+			RestrictPassword = restrict;
+			}
+
+		public UserEntry (string login, string password, string rule="User"): this(login, password, rule, false, false)
+			{
 			}
 		}
 
