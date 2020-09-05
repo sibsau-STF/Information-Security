@@ -71,52 +71,78 @@ namespace Auth
 			}
 		}
 
-	static class Auth
+	abstract class Auth
 		{
-		static string fileName = "./users.json";
-		static JsonSerializerOptions options = new JsonSerializerOptions() { AllowTrailingCommas = true, IgnoreNullValues = false };
+		public abstract AuthResponse authUser (string login, string password);
+		public abstract AuthResponse registerUser (UserEntry user);
+		public abstract List<UserEntry> readAllUsers ();
+		public abstract void writeUsers (List<UserEntry> users);
+		}
 
-		public static AuthResponce ruthUser (string login, string password, string repeat)
+	class JsonAuth: Auth
+		{
+		public static Auth Instance { get; protected set; }
+		string fileName = "./users.json";
+		JsonSerializerOptions options =
+			new JsonSerializerOptions() { 
+				AllowTrailingCommas = true,
+				IgnoreNullValues = false,
+				WriteIndented = true,
+				};
+
+		public JsonAuth (string filePath)
 			{
-			if ( password != repeat )
-				return new AuthResponce(1, "Passwords don't match");
+			if ( filePath == "" )
+				throw new ArgumentException("Specified empty file path");
+			fileName = filePath;
+			Instance = this;
+			}
+
+		public override AuthResponse authUser (string login, string password)
+			{
 			UserEntry user = new UserEntry(login, password);
 
 			List<UserEntry> users = readAllUsers();
-			if ( users.Count == 0 || !users.Contains(user) )
-				return new AuthResponce(2, "User doesn't exists");
+			UserEntry userData = users.Find(usr => usr.Login == user.Login && usr.Password == user.Password);
+			if ( userData == null )
+				return new AuthResponse(2, "User doesn't exists");
 
-			return new AuthResponce(0, "Successful logged");
+			return new AuthResponse(0, "Successful logged", userData);
 			}
 
-
-		public static AuthResponce registerUser (UserEntry user)
+		public override AuthResponse registerUser (UserEntry user)
 			{
 			List<UserEntry> users = readAllUsers();
 			if ( users.Contains(user) )
-				return new AuthResponce(3, "User already in system");
+				return new AuthResponse(3, "User already in system");
 
 			//TODO: add field checks
 			users.Append(user);
 			writeUsers(users);
-			return new AuthResponce(0, "Successful registered");
+			return new AuthResponse(0, "Successful registered");
 			}
 
-		public static List<UserEntry> readAllUsers ()
+		public override List<UserEntry> readAllUsers ()
 			{
 			if ( !File.Exists(fileName) )
 				File.Create(fileName).Close();
 			string json = File.ReadAllText(fileName);
-			List<UserEntry> users = JsonSerializer.Deserialize<List<UserEntry>>(json, options);
-			if ( users == null )
+			List<UserEntry> users;
+			if ( json == "")
 				{
 				users = new List<UserEntry>();
-				JsonSerializer.Serialize<List<UserEntry>>(users, options);
+				users.Add(new UserEntry("Admin", "", "Admin"));
+				json = JsonSerializer.Serialize<List<UserEntry>>(users, options);
+				File.WriteAllText(fileName, json);
+				}
+			else
+				{
+				users = JsonSerializer.Deserialize<List<UserEntry>>(json, options);
 				}
 			return users;
 			}
 
-		public static void writeUsers (List<UserEntry> users)
+		public override void writeUsers (List<UserEntry> users)
 			{
 			if ( !File.Exists(fileName) )
 				File.Create(fileName).Close();
