@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 namespace Auth
 	{
 
-	class AuthResponse
+	public class AuthResponse
 		{
 		public string Message { get; protected set; }
 
@@ -71,7 +71,7 @@ namespace Auth
 			}
 		}
 
-	abstract class BaseAuth
+	public abstract class BaseAuth
 		{
 		public abstract AuthResponse authUser (string login, string password);
 		public abstract AuthResponse registerUser (UserEntry user);
@@ -79,7 +79,7 @@ namespace Auth
 		public abstract void writeUsers (List<UserEntry> users);
 		}
 
-	class JsonAuth: BaseAuth
+	public class JsonAuth: BaseAuth
 		{
 		public static BaseAuth Instance { get; protected set; }
 		string fileName = "./users.json";
