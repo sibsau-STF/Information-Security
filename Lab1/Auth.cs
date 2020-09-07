@@ -71,7 +71,7 @@ namespace Auth
 			}
 		}
 
-	abstract class Auth
+	abstract class BaseAuth
 		{
 		public abstract AuthResponse authUser (string login, string password);
 		public abstract AuthResponse registerUser (UserEntry user);
@@ -79,9 +79,9 @@ namespace Auth
 		public abstract void writeUsers (List<UserEntry> users);
 		}
 
-	class JsonAuth: Auth
+	class JsonAuth: BaseAuth
 		{
-		public static Auth Instance { get; protected set; }
+		public static BaseAuth Instance { get; protected set; }
 		string fileName = "./users.json";
 		JsonSerializerOptions options =
 			new JsonSerializerOptions() { 
