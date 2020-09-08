@@ -48,6 +48,9 @@ namespace Lab1
 
 		private void openMain (UserEntry user)
 			{
+			Main form = new Main(Auth, user);
+			form.Show();
+			this.Hide();
 			}
 		}
 	}
