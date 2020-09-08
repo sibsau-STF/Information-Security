@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Auth;
+
 namespace Lab1
 	{
 	public partial class Main : Form
@@ -27,7 +28,11 @@ namespace Lab1
 			Users = AuthModel.readAllUsers();
 			User = user;
 			nicknameLabel.Text = "User: " + User.Login;
-			DisplayUsers();
+
+			if ( User.Rule != "Admin" )
+				usersPanel.Enabled = false;
+			else
+				DisplayUsers();
 			}
 
 		void DisplayUsers ()
@@ -64,6 +69,55 @@ namespace Lab1
 		private void button2_Click (object sender, EventArgs e)
 			{
 			SaveChanges();
+			}
+
+		private void printMsg(string text, bool error = true)
+			{
+			statusLabel.Text = text;
+			statusLabel.ForeColor = error ? Color.DarkRed : Color.Green;
+			}
+
+		private void changePassButton_Click (object sender, EventArgs e)
+			{
+			var oldPassword = this.oldPassBox.Text;
+			var newPassword = this.newPassBox.Text;
+			var repeatPassword = this.repeatPassBox.Text;
+
+			if ( newPassword != repeatPassword )
+				{
+				printMsg("Passwords don't match");
+				return;
+				}
+
+			if ( oldPassword != User.Password )
+				{
+				printMsg("Wrong old password");
+				return;
+				}
+
+			if ( oldPassword == newPassword )
+				{
+				printMsg("Specify another new password");
+				return;
+				}
+
+			try
+				{
+				User.Password = newPassword;
+				AuthModel.changeUser(User);
+				printMsg("Success", false);
+				}
+			catch (ArgumentException ex )
+				{
+				User.Password = oldPassword;
+				printMsg(ex.Message);
+				return;
+				}
+			finally
+				{
+				Users = AuthModel.readAllUsers();
+				DisplayUsers();
+				}
 			}
 		}
 	}

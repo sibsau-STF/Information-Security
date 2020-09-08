@@ -30,16 +30,17 @@
 			{
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.mainPanel = new System.Windows.Forms.Panel();
+			this.statusLabel = new System.Windows.Forms.Label();
 			this.logoutButton = new System.Windows.Forms.Button();
 			this.nicknameLabel = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.changePassButton = new System.Windows.Forms.Button();
+			this.repeatPassBox = new System.Windows.Forms.TextBox();
+			this.oldPassBox = new System.Windows.Forms.TextBox();
+			this.newPassBox = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.usersPanel = new System.Windows.Forms.Panel();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.button2 = new System.Windows.Forms.Button();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.mainPanel.SuspendLayout();
 			this.usersPanel.SuspendLayout();
@@ -62,17 +63,27 @@
 			this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.mainPanel.Controls.Add(this.statusLabel);
 			this.mainPanel.Controls.Add(this.logoutButton);
 			this.mainPanel.Controls.Add(this.nicknameLabel);
-			this.mainPanel.Controls.Add(this.button1);
-			this.mainPanel.Controls.Add(this.textBox3);
-			this.mainPanel.Controls.Add(this.textBox2);
-			this.mainPanel.Controls.Add(this.textBox1);
+			this.mainPanel.Controls.Add(this.changePassButton);
+			this.mainPanel.Controls.Add(this.repeatPassBox);
+			this.mainPanel.Controls.Add(this.oldPassBox);
+			this.mainPanel.Controls.Add(this.newPassBox);
 			this.mainPanel.Controls.Add(this.label3);
 			this.mainPanel.Location = new System.Drawing.Point(3, 3);
 			this.mainPanel.Name = "mainPanel";
 			this.mainPanel.Size = new System.Drawing.Size(935, 179);
 			this.mainPanel.TabIndex = 0;
+			// 
+			// statusLabel
+			// 
+			this.statusLabel.AutoSize = true;
+			this.statusLabel.ForeColor = System.Drawing.Color.DarkRed;
+			this.statusLabel.Location = new System.Drawing.Point(299, 131);
+			this.statusLabel.Name = "statusLabel";
+			this.statusLabel.Size = new System.Drawing.Size(0, 20);
+			this.statusLabel.TabIndex = 6;
 			// 
 			// logoutButton
 			// 
@@ -93,42 +104,43 @@
 			this.nicknameLabel.TabIndex = 4;
 			this.nicknameLabel.Text = "label1";
 			// 
-			// button1
+			// changePassButton
 			// 
-			this.button1.Location = new System.Drawing.Point(316, 98);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(109, 41);
-			this.button1.TabIndex = 2;
-			this.button1.TabStop = false;
-			this.button1.Text = "Confirm";
-			this.button1.UseVisualStyleBackColor = true;
+			this.changePassButton.Location = new System.Drawing.Point(313, 53);
+			this.changePassButton.Name = "changePassButton";
+			this.changePassButton.Size = new System.Drawing.Size(109, 41);
+			this.changePassButton.TabIndex = 2;
+			this.changePassButton.TabStop = false;
+			this.changePassButton.Text = "Confirm";
+			this.changePassButton.UseVisualStyleBackColor = true;
+			this.changePassButton.Click += new System.EventHandler(this.changePassButton_Click);
 			// 
-			// textBox3
+			// repeatPassBox
 			// 
-			this.textBox3.Location = new System.Drawing.Point(24, 145);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.PasswordChar = '*';
-			this.textBox3.PlaceholderText = "Repeat password";
-			this.textBox3.Size = new System.Drawing.Size(250, 27);
-			this.textBox3.TabIndex = 3;
+			this.repeatPassBox.Location = new System.Drawing.Point(24, 145);
+			this.repeatPassBox.Name = "repeatPassBox";
+			this.repeatPassBox.PasswordChar = '*';
+			this.repeatPassBox.PlaceholderText = "Repeat password";
+			this.repeatPassBox.Size = new System.Drawing.Size(250, 27);
+			this.repeatPassBox.TabIndex = 3;
 			// 
-			// textBox2
+			// oldPassBox
 			// 
-			this.textBox2.Location = new System.Drawing.Point(24, 53);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.PasswordChar = '*';
-			this.textBox2.PlaceholderText = "Old password";
-			this.textBox2.Size = new System.Drawing.Size(250, 27);
-			this.textBox2.TabIndex = 1;
+			this.oldPassBox.Location = new System.Drawing.Point(24, 53);
+			this.oldPassBox.Name = "oldPassBox";
+			this.oldPassBox.PasswordChar = '*';
+			this.oldPassBox.PlaceholderText = "Old password";
+			this.oldPassBox.Size = new System.Drawing.Size(250, 27);
+			this.oldPassBox.TabIndex = 1;
 			// 
-			// textBox1
+			// newPassBox
 			// 
-			this.textBox1.Location = new System.Drawing.Point(24, 99);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.PasswordChar = '*';
-			this.textBox1.PlaceholderText = "New password";
-			this.textBox1.Size = new System.Drawing.Size(250, 27);
-			this.textBox1.TabIndex = 2;
+			this.newPassBox.Location = new System.Drawing.Point(24, 99);
+			this.newPassBox.Name = "newPassBox";
+			this.newPassBox.PasswordChar = '*';
+			this.newPassBox.PlaceholderText = "New password";
+			this.newPassBox.Size = new System.Drawing.Size(250, 27);
+			this.newPassBox.TabIndex = 2;
 			// 
 			// label3
 			// 
@@ -150,16 +162,6 @@
 			this.usersPanel.Size = new System.Drawing.Size(935, 399);
 			this.usersPanel.TabIndex = 1;
 			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.RowHeadersWidth = 51;
-			this.dataGridView1.Size = new System.Drawing.Size(933, 329);
-			this.dataGridView1.TabIndex = 0;
-			this.dataGridView1.Text = "dataGridView1";
-			// 
 			// button2
 			// 
 			this.button2.Location = new System.Drawing.Point(8, 349);
@@ -169,6 +171,16 @@
 			this.button2.Text = "Save Changes";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.RowHeadersWidth = 51;
+			this.dataGridView1.Size = new System.Drawing.Size(933, 329);
+			this.dataGridView1.TabIndex = 0;
+			this.dataGridView1.Text = "dataGridView1";
 			// 
 			// Main
 			// 
@@ -192,15 +204,16 @@
 
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.Panel mainPanel;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox oldPassBox;
+		private System.Windows.Forms.TextBox newPassBox;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Panel usersPanel;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button changePassButton;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Label nicknameLabel;
 		private System.Windows.Forms.Button logoutButton;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Label statusLabel;
+		private System.Windows.Forms.TextBox repeatPassBox;
 		}
 	}
