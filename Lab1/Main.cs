@@ -72,6 +72,17 @@ namespace Lab1
 					}
 				}
 			}
+		private void addUserButton_Click (object sender, EventArgs e)
+			{
+			using ( AddUser dlg = new AddUser(AuthModel) )
+				{
+				if ( dlg.ShowDialog() == DialogResult.OK )
+					{
+					Users = AuthModel.readAllUsers();
+					DisplayUsers();
+					}
+				}
+			}
 
 		private void button2_Click (object sender, EventArgs e)
 			{

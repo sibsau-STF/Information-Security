@@ -30,12 +30,13 @@
 			{
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.mainPanel = new System.Windows.Forms.Panel();
+			this.changePass = new System.Windows.Forms.Button();
 			this.logoutButton = new System.Windows.Forms.Button();
 			this.nicknameLabel = new System.Windows.Forms.Label();
 			this.usersPanel = new System.Windows.Forms.Panel();
+			this.addUserButton = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.changePass = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.mainPanel.SuspendLayout();
 			this.usersPanel.SuspendLayout();
@@ -66,6 +67,16 @@
 			this.mainPanel.Size = new System.Drawing.Size(935, 179);
 			this.mainPanel.TabIndex = 0;
 			// 
+			// changePass
+			// 
+			this.changePass.Location = new System.Drawing.Point(23, 81);
+			this.changePass.Name = "changePass";
+			this.changePass.Size = new System.Drawing.Size(153, 29);
+			this.changePass.TabIndex = 6;
+			this.changePass.Text = " Change password";
+			this.changePass.UseVisualStyleBackColor = true;
+			this.changePass.Click += new System.EventHandler(this.changePass_Click);
+			// 
 			// logoutButton
 			// 
 			this.logoutButton.Location = new System.Drawing.Point(23, 130);
@@ -88,6 +99,7 @@
 			// usersPanel
 			// 
 			this.usersPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.usersPanel.Controls.Add(this.addUserButton);
 			this.usersPanel.Controls.Add(this.button2);
 			this.usersPanel.Controls.Add(this.dataGridView1);
 			this.usersPanel.Dock = System.Windows.Forms.DockStyle.Right;
@@ -95,6 +107,16 @@
 			this.usersPanel.Name = "usersPanel";
 			this.usersPanel.Size = new System.Drawing.Size(935, 399);
 			this.usersPanel.TabIndex = 1;
+			// 
+			// addUserButton
+			// 
+			this.addUserButton.Location = new System.Drawing.Point(179, 349);
+			this.addUserButton.Name = "addUserButton";
+			this.addUserButton.Size = new System.Drawing.Size(94, 29);
+			this.addUserButton.TabIndex = 2;
+			this.addUserButton.Text = "Add user";
+			this.addUserButton.UseVisualStyleBackColor = true;
+			this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
 			// 
 			// button2
 			// 
@@ -115,16 +137,6 @@
 			this.dataGridView1.Size = new System.Drawing.Size(933, 329);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.Text = "dataGridView1";
-			// 
-			// changePass
-			// 
-			this.changePass.Location = new System.Drawing.Point(23, 81);
-			this.changePass.Name = "changePass";
-			this.changePass.Size = new System.Drawing.Size(153, 29);
-			this.changePass.TabIndex = 6;
-			this.changePass.Text = " Change password";
-			this.changePass.UseVisualStyleBackColor = true;
-			this.changePass.Click += new System.EventHandler(this.changePass_Click);
 			// 
 			// Main
 			// 
@@ -154,5 +166,6 @@
 		private System.Windows.Forms.Button logoutButton;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button changePass;
+		private System.Windows.Forms.Button addUserButton;
 		}
 	}

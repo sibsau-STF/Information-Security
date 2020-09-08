@@ -150,7 +150,7 @@ namespace Auth
 			if ( user.RestrictPassword && !validatePassword(user.Password) )
 				return new AuthResponse(4, "Password doesn't match pattern");
 
-			users.Append(user);
+			users.Add(user);
 			writeUsers(users);
 			return new AuthResponse(0, "Successful registered");
 			}
