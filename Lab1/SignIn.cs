@@ -52,5 +52,9 @@ namespace Lab1
 			form.Show();
 			this.Hide();
 			}
+		private void AboutProgram_Click (object sender, System.EventArgs e)
+			{
+			new About().Show();
+			}
 		}
 	}

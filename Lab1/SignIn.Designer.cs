@@ -28,32 +28,54 @@
 		/// </summary>
 		private void InitializeComponent ()
 			{
-			this.label1 = new System.Windows.Forms.Label();
-			this.loginBox = new System.Windows.Forms.TextBox();
-			this.passwordBox = new System.Windows.Forms.TextBox();
+			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.AboutProgram = new System.Windows.Forms.ToolStripMenuItem();
 			this.label2 = new System.Windows.Forms.Label();
+			this.passwordBox = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
-			this.loginPanel = new System.Windows.Forms.Panel();
+			this.loginBox = new System.Windows.Forms.TextBox();
 			this.warningLabel = new System.Windows.Forms.Label();
+			this.loginPanel = new System.Windows.Forms.Panel();
+			this.menuStrip1.SuspendLayout();
 			this.loginPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// label1
+			// menuStrip1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(424, 196);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(46, 20);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Login";
+			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.Name = "menuStrip1";
+			this.menuStrip1.Size = new System.Drawing.Size(947, 28);
+			this.menuStrip1.TabIndex = 8;
+			this.menuStrip1.Text = "menuStrip1";
 			// 
-			// loginBox
+			// toolStripMenuItem1
 			// 
-			this.loginBox.Location = new System.Drawing.Point(355, 241);
-			this.loginBox.Name = "loginBox";
-			this.loginBox.PlaceholderText = "Login";
-			this.loginBox.Size = new System.Drawing.Size(184, 27);
-			this.loginBox.TabIndex = 1;
+			this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutProgram});
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(81, 24);
+			this.toolStripMenuItem1.Text = "Справка";
+			// 
+			// AboutProgram
+			// 
+			this.AboutProgram.Name = "AboutProgram";
+			this.AboutProgram.Size = new System.Drawing.Size(187, 26);
+			this.AboutProgram.Text = "О программе";
+			this.AboutProgram.Click += new System.EventHandler(this.AboutProgram_Click);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(412, 293);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(70, 20);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Password";
 			// 
 			// passwordBox
 			// 
@@ -64,14 +86,14 @@
 			this.passwordBox.Size = new System.Drawing.Size(184, 27);
 			this.passwordBox.TabIndex = 2;
 			// 
-			// label2
+			// label1
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(412, 293);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(70, 20);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "Password";
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(424, 196);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(46, 20);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Login";
 			// 
 			// button1
 			// 
@@ -83,18 +105,13 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
-			// loginPanel
+			// loginBox
 			// 
-			this.loginPanel.Controls.Add(this.warningLabel);
-			this.loginPanel.Controls.Add(this.loginBox);
-			this.loginPanel.Controls.Add(this.button1);
-			this.loginPanel.Controls.Add(this.label1);
-			this.loginPanel.Controls.Add(this.passwordBox);
-			this.loginPanel.Controls.Add(this.label2);
-			this.loginPanel.Location = new System.Drawing.Point(2, 1);
-			this.loginPanel.Name = "loginPanel";
-			this.loginPanel.Size = new System.Drawing.Size(947, 644);
-			this.loginPanel.TabIndex = 7;
+			this.loginBox.Location = new System.Drawing.Point(355, 241);
+			this.loginBox.Name = "loginBox";
+			this.loginBox.PlaceholderText = "Login";
+			this.loginBox.Size = new System.Drawing.Size(184, 27);
+			this.loginBox.TabIndex = 1;
 			// 
 			// warningLabel
 			// 
@@ -104,14 +121,31 @@
 			this.warningLabel.Size = new System.Drawing.Size(0, 20);
 			this.warningLabel.TabIndex = 7;
 			// 
-			// Form1
+			// loginPanel
+			// 
+			this.loginPanel.Controls.Add(this.warningLabel);
+			this.loginPanel.Controls.Add(this.loginBox);
+			this.loginPanel.Controls.Add(this.button1);
+			this.loginPanel.Controls.Add(this.label1);
+			this.loginPanel.Controls.Add(this.passwordBox);
+			this.loginPanel.Controls.Add(this.label2);
+			this.loginPanel.Controls.Add(this.menuStrip1);
+			this.loginPanel.Location = new System.Drawing.Point(2, 1);
+			this.loginPanel.Name = "loginPanel";
+			this.loginPanel.Size = new System.Drawing.Size(947, 644);
+			this.loginPanel.TabIndex = 7;
+			// 
+			// SignIn
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(952, 643);
 			this.Controls.Add(this.loginPanel);
-			this.Name = "Form1";
+			this.MainMenuStrip = this.menuStrip1;
+			this.Name = "SignIn";
 			this.Text = "Form1";
+			this.menuStrip1.ResumeLayout(false);
+			this.menuStrip1.PerformLayout();
 			this.loginPanel.ResumeLayout(false);
 			this.loginPanel.PerformLayout();
 			this.ResumeLayout(false);
@@ -120,13 +154,16 @@
 
 		#endregion
 
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox loginBox;
-		private System.Windows.Forms.TextBox passwordBox;
+		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem AboutProgram;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox passwordBox;
+		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Panel loginPanel;
+		private System.Windows.Forms.TextBox loginBox;
 		private System.Windows.Forms.Label warningLabel;
+		private System.Windows.Forms.Panel loginPanel;
 		}
 	}
 
