@@ -38,6 +38,7 @@
 			this.loginBox = new System.Windows.Forms.TextBox();
 			this.warningLabel = new System.Windows.Forms.Label();
 			this.loginPanel = new System.Windows.Forms.Panel();
+			this.repeatBox = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.loginPanel.SuspendLayout();
 			this.SuspendLayout();
@@ -116,13 +117,14 @@
 			// warningLabel
 			// 
 			this.warningLabel.AutoSize = true;
-			this.warningLabel.Location = new System.Drawing.Point(424, 383);
+			this.warningLabel.Location = new System.Drawing.Point(350, 405);
 			this.warningLabel.Name = "warningLabel";
 			this.warningLabel.Size = new System.Drawing.Size(0, 20);
 			this.warningLabel.TabIndex = 7;
 			// 
 			// loginPanel
 			// 
+			this.loginPanel.Controls.Add(this.repeatBox);
 			this.loginPanel.Controls.Add(this.warningLabel);
 			this.loginPanel.Controls.Add(this.loginBox);
 			this.loginPanel.Controls.Add(this.button1);
@@ -134,6 +136,16 @@
 			this.loginPanel.Name = "loginPanel";
 			this.loginPanel.Size = new System.Drawing.Size(947, 644);
 			this.loginPanel.TabIndex = 7;
+			// 
+			// repeatBox
+			// 
+			this.repeatBox.Enabled = false;
+			this.repeatBox.Location = new System.Drawing.Point(355, 383);
+			this.repeatBox.Name = "repeatBox";
+			this.repeatBox.PasswordChar = '*';
+			this.repeatBox.PlaceholderText = "Repeat Password";
+			this.repeatBox.Size = new System.Drawing.Size(185, 27);
+			this.repeatBox.TabIndex = 9;
 			// 
 			// SignIn
 			// 
@@ -164,6 +176,7 @@
 		private System.Windows.Forms.TextBox loginBox;
 		private System.Windows.Forms.Label warningLabel;
 		private System.Windows.Forms.Panel loginPanel;
+		private System.Windows.Forms.TextBox repeatBox;
 		}
 	}
 

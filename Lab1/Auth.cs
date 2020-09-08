@@ -74,6 +74,7 @@ namespace Auth
 
 	public abstract class BaseAuth
 		{
+		public abstract UserEntry findUser (string login);
 
 		public abstract AuthResponse authUser (string login, string password);
 
@@ -128,6 +129,13 @@ namespace Auth
 			Instance = this;
 			}
 
+		public override UserEntry findUser (string login)
+			{
+			List<UserEntry> users = readAllUsers();
+			UserEntry userData = users.Find(usr => usr.Login == login);
+			return userData;
+			}
+
 		public override AuthResponse authUser (string login, string password)
 			{
 			UserEntry user = new UserEntry(login, password);
@@ -152,7 +160,7 @@ namespace Auth
 
 			users.Add(user);
 			writeUsers(users);
-			return new AuthResponse(0, "Successful registered");
+			return new AuthResponse(0, "Successful registered", user);
 			}
 
 		public override AuthResponse changeUser (UserEntry newUser)
@@ -169,7 +177,7 @@ namespace Auth
 			users.Remove(userData);
 			users.Add(newUser);
 			writeUsers(users);
-			return new AuthResponse(0, "Successfuly changed data");
+			return new AuthResponse(0, "Successfuly changed data", newUser);
 			}
 
 		public override List<UserEntry> readAllUsers ()

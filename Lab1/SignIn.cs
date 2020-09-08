@@ -16,6 +16,7 @@ namespace Lab1
 		BaseAuth Auth = new JsonAuth("./users.json");
 		UserEntry User;
 		int LoginTries = 0;
+
 		public SignIn ()
 			{
 			InitializeComponent();
@@ -27,6 +28,40 @@ namespace Lab1
 			{
 			string login = loginBox.Text;
 			string password = passwordBox.Text;
+			string repeat = repeatBox.Text;
+
+			// get user info
+			var userData = Auth.findUser(login);
+			// если входит в первый раз, то надо изменить пароль
+			if ( userData.Password == "" )
+				{
+				repeatBox.Enabled = true;
+				warningLabel.Text = "Repeat password";
+
+				if ( password != repeat )
+					{
+					warningLabel.Text = "Passwords don't match";
+					return;
+					}
+
+				if ( password=="")
+					{
+					warningLabel.Text = "Password must not be empty";
+					return;
+					}
+
+				// Set password
+				userData.Password = password;
+				var result = Auth.changeUser(userData);
+				if ( result.ID == 0 )
+					{
+					User = result.UserData;
+					LoginTries = 0;
+					openMain(User);
+					return;
+					}
+				}
+
 			var response = Auth.authUser(login, password);
 
 			if ( response.ID == 0 )
