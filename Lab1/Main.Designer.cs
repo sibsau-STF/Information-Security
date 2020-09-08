@@ -37,6 +37,7 @@
 			this.addUserButton = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.banButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.mainPanel.SuspendLayout();
 			this.usersPanel.SuspendLayout();
@@ -99,6 +100,7 @@
 			// usersPanel
 			// 
 			this.usersPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.usersPanel.Controls.Add(this.banButton);
 			this.usersPanel.Controls.Add(this.addUserButton);
 			this.usersPanel.Controls.Add(this.button2);
 			this.usersPanel.Controls.Add(this.dataGridView1);
@@ -138,6 +140,16 @@
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.Text = "dataGridView1";
 			// 
+			// banButton
+			// 
+			this.banButton.Location = new System.Drawing.Point(292, 349);
+			this.banButton.Name = "banButton";
+			this.banButton.Size = new System.Drawing.Size(94, 29);
+			this.banButton.TabIndex = 3;
+			this.banButton.Text = "Ban User";
+			this.banButton.UseVisualStyleBackColor = true;
+			this.banButton.Click += new System.EventHandler(this.banButton_Click);
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -167,5 +179,6 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button changePass;
 		private System.Windows.Forms.Button addUserButton;
+		private System.Windows.Forms.Button banButton;
 		}
 	}

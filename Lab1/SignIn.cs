@@ -32,6 +32,13 @@ namespace Lab1
 
 			// get user info
 			var userData = Auth.findUser(login);
+
+			if ( userData.IsBanned )
+				{
+				warningLabel.Text = "User is banned";
+				return;
+				}
+
 			// если входит в первый раз, то надо изменить пароль
 			if ( userData.Password == "" )
 				{

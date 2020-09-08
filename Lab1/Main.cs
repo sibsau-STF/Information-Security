@@ -93,5 +93,16 @@ namespace Lab1
 			Application.Exit();
 			}
 
+		private void banButton_Click (object sender, EventArgs e)
+			{
+			using ( BanUser dlg = new BanUser(AuthModel) )
+				{
+				if ( dlg.ShowDialog() == DialogResult.OK )
+					{
+					Users = AuthModel.readAllUsers();
+					DisplayUsers();
+					}
+				}
+			}
 		}
 	}
