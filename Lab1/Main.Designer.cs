@@ -34,10 +34,9 @@
 			this.logoutButton = new System.Windows.Forms.Button();
 			this.nicknameLabel = new System.Windows.Forms.Label();
 			this.usersPanel = new System.Windows.Forms.Panel();
-			this.addUserButton = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.banButton = new System.Windows.Forms.Button();
+			this.addUserButton = new System.Windows.Forms.Button();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.mainPanel.SuspendLayout();
 			this.usersPanel.SuspendLayout();
@@ -102,7 +101,6 @@
 			this.usersPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.usersPanel.Controls.Add(this.banButton);
 			this.usersPanel.Controls.Add(this.addUserButton);
-			this.usersPanel.Controls.Add(this.button2);
 			this.usersPanel.Controls.Add(this.dataGridView1);
 			this.usersPanel.Dock = System.Windows.Forms.DockStyle.Right;
 			this.usersPanel.Location = new System.Drawing.Point(3, 188);
@@ -110,24 +108,25 @@
 			this.usersPanel.Size = new System.Drawing.Size(935, 399);
 			this.usersPanel.TabIndex = 1;
 			// 
+			// banButton
+			// 
+			this.banButton.Location = new System.Drawing.Point(136, 357);
+			this.banButton.Name = "banButton";
+			this.banButton.Size = new System.Drawing.Size(94, 29);
+			this.banButton.TabIndex = 3;
+			this.banButton.Text = "Ban User";
+			this.banButton.UseVisualStyleBackColor = true;
+			this.banButton.Click += new System.EventHandler(this.banButton_Click);
+			// 
 			// addUserButton
 			// 
-			this.addUserButton.Location = new System.Drawing.Point(179, 349);
+			this.addUserButton.Location = new System.Drawing.Point(23, 357);
 			this.addUserButton.Name = "addUserButton";
 			this.addUserButton.Size = new System.Drawing.Size(94, 29);
 			this.addUserButton.TabIndex = 2;
 			this.addUserButton.Text = "Add user";
 			this.addUserButton.UseVisualStyleBackColor = true;
 			this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(8, 349);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(153, 29);
-			this.button2.TabIndex = 1;
-			this.button2.Text = "Save Changes";
-			this.button2.UseVisualStyleBackColor = true;
 			// 
 			// dataGridView1
 			// 
@@ -138,16 +137,6 @@
 			this.dataGridView1.Size = new System.Drawing.Size(933, 329);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.Text = "dataGridView1";
-			// 
-			// banButton
-			// 
-			this.banButton.Location = new System.Drawing.Point(292, 349);
-			this.banButton.Name = "banButton";
-			this.banButton.Size = new System.Drawing.Size(94, 29);
-			this.banButton.TabIndex = 3;
-			this.banButton.Text = "Ban User";
-			this.banButton.UseVisualStyleBackColor = true;
-			this.banButton.Click += new System.EventHandler(this.banButton_Click);
 			// 
 			// Main
 			// 
@@ -175,7 +164,6 @@
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Label nicknameLabel;
 		private System.Windows.Forms.Button logoutButton;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button changePass;
 		private System.Windows.Forms.Button addUserButton;
 		private System.Windows.Forms.Button banButton;
