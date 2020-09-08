@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Auth
 	{
@@ -73,6 +74,7 @@ namespace Auth
 
 	public abstract class BaseAuth
 		{
+
 		public abstract AuthResponse authUser (string login, string password);
 
 		public abstract AuthResponse registerUser (UserEntry user);
@@ -82,6 +84,29 @@ namespace Auth
 		public abstract List<UserEntry> readAllUsers ();
 
 		public abstract void writeUsers (List<UserEntry> users);
+
+		// строчные и прописные и цифры
+		protected bool validatePassword (string password)
+			{
+			string AZ = "[A-Z]";
+			string az = "[a-z]";
+			string AY = "[А-Я]";
+			string ay = "[а-я]";
+			string number = "[0-9]";
+
+			if ( password == "" )
+				return true;
+
+			var matches = new Regex($"^(?:{AZ}|{az}|{AY}|{ay}|{number})*$").Match(password);
+			if ( matches.Groups.Count != 1 )
+				return false;
+
+			var Upper = new Regex($"({AZ}|{AY})").IsMatch(password);
+			var Lower = new Regex($"({az}|{ay})").IsMatch(password);
+			var Digit = new Regex($"({number})").IsMatch(password);
+
+			return Upper && Lower && Digit;
+			}
 		}
 
 	public class JsonAuth: BaseAuth
@@ -106,7 +131,6 @@ namespace Auth
 		public override AuthResponse authUser (string login, string password)
 			{
 			UserEntry user = new UserEntry(login, password);
-
 			List<UserEntry> users = readAllUsers();
 			UserEntry userData = users.Find(usr => usr.Login == user.Login);
 			if ( userData == null )
@@ -123,7 +147,9 @@ namespace Auth
 			if ( users.Any(usr => usr.Login == user.Login ))
 				return new AuthResponse(3, "User already in system");
 
-			//TODO: add field checks
+			if ( user.RestrictPassword && !validatePassword(user.Password) )
+				return new AuthResponse(4, "Password doesn't match pattern");
+
 			users.Append(user);
 			writeUsers(users);
 			return new AuthResponse(0, "Successful registered");
@@ -133,8 +159,12 @@ namespace Auth
 			{
 			List<UserEntry> users = readAllUsers();
 			var userData = users.Find(usr => usr.Login == newUser.Login);
+
 			if (userData == null)
 				return new AuthResponse(2, "User doesn't exists");
+
+			if ( newUser.RestrictPassword && !validatePassword(newUser.Password) )
+				return new AuthResponse(4, "Password doesn't match pattern");
 
 			users.Remove(userData);
 			users.Add(newUser);

@@ -101,23 +101,21 @@ namespace Lab1
 				return;
 				}
 
-			try
+			User.Password = newPassword;
+			var response = AuthModel.changeUser(User);
+			if ( response.ID == 0 )
 				{
-				User.Password = newPassword;
-				AuthModel.changeUser(User);
 				printMsg("Success", false);
 				}
-			catch (ArgumentException ex )
+			else
 				{
 				User.Password = oldPassword;
-				printMsg(ex.Message);
-				return;
+				printMsg(response.Message);
 				}
-			finally
-				{
-				Users = AuthModel.readAllUsers();
-				DisplayUsers();
-				}
+
+			Users = AuthModel.readAllUsers();
+			DisplayUsers();
+				
 			}
 		}
 	}
