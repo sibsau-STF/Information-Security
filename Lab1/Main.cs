@@ -39,8 +39,8 @@ namespace Lab1
 			{
 			tableUsers.DataSource = Users;
 			dataGridView1.DataSource = tableUsers;
-			dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
-			dataGridView1.AllowUserToAddRows = true;
+			dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dataGridView1.ReadOnly = true;
 			}
 
 		void SaveChanges ()
@@ -60,62 +60,27 @@ namespace Lab1
 			{
 			openSignIn();
 			}
-
-		private void Main_FormClosed (object sender, FormClosedEventArgs e)
+		private void changePass_Click (object sender, EventArgs e)
 			{
-			Application.Exit();
+			using ( ChangePassword dlg = new ChangePassword(User, AuthModel) )
+				{
+				if ( dlg.ShowDialog() == DialogResult.OK )
+					{
+					User = dlg.User;
+					Users = AuthModel.readAllUsers();
+					DisplayUsers();
+					}
+				}
 			}
 
 		private void button2_Click (object sender, EventArgs e)
 			{
 			SaveChanges();
 			}
-
-		private void printMsg(string text, bool error = true)
+		private void Main_FormClosed (object sender, FormClosedEventArgs e)
 			{
-			statusLabel.Text = text;
-			statusLabel.ForeColor = error ? Color.DarkRed : Color.Green;
+			Application.Exit();
 			}
 
-		private void changePassButton_Click (object sender, EventArgs e)
-			{
-			var oldPassword = this.oldPassBox.Text;
-			var newPassword = this.newPassBox.Text;
-			var repeatPassword = this.repeatPassBox.Text;
-
-			if ( newPassword != repeatPassword )
-				{
-				printMsg("Passwords don't match");
-				return;
-				}
-
-			if ( oldPassword != User.Password )
-				{
-				printMsg("Wrong old password");
-				return;
-				}
-
-			if ( oldPassword == newPassword )
-				{
-				printMsg("Specify another new password");
-				return;
-				}
-
-			User.Password = newPassword;
-			var response = AuthModel.changeUser(User);
-			if ( response.ID == 0 )
-				{
-				printMsg("Success", false);
-				}
-			else
-				{
-				User.Password = oldPassword;
-				printMsg(response.Message);
-				}
-
-			Users = AuthModel.readAllUsers();
-			DisplayUsers();
-				
-			}
 		}
 	}
