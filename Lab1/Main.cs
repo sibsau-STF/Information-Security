@@ -43,12 +43,6 @@ namespace Lab1
 			dataGridView1.ReadOnly = true;
 			}
 
-		void SaveChanges ()
-			{
-			AuthModel.writeUsers(Users);
-			tableUsers.DataSource = Users;
-			}
-
 		private void openSignIn ()
 			{
 			SignIn form = new SignIn();
@@ -84,10 +78,6 @@ namespace Lab1
 				}
 			}
 
-		private void button2_Click (object sender, EventArgs e)
-			{
-			SaveChanges();
-			}
 		private void Main_FormClosed (object sender, FormClosedEventArgs e)
 			{
 			Application.Exit();
