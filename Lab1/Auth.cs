@@ -103,9 +103,11 @@ namespace Auth
 			UserEntry user = new UserEntry(login, password);
 
 			List<UserEntry> users = readAllUsers();
-			UserEntry userData = users.Find(usr => usr.Login == user.Login && usr.Password == user.Password);
+			UserEntry userData = users.Find(usr => usr.Login == user.Login);
 			if ( userData == null )
 				return new AuthResponse(2, "User doesn't exists");
+			if ( userData.Password != password )
+				return new AuthResponse(1, "Wrong password");
 
 			return new AuthResponse(0, "Successful logged", userData);
 			}
@@ -113,7 +115,7 @@ namespace Auth
 		public override AuthResponse registerUser (UserEntry user)
 			{
 			List<UserEntry> users = readAllUsers();
-			if ( users.Contains(user) )
+			if ( users.Any(usr => usr.Login == user.Login ))
 				return new AuthResponse(3, "User already in system");
 
 			//TODO: add field checks
@@ -146,7 +148,8 @@ namespace Auth
 			{
 			if ( !File.Exists(fileName) )
 				File.Create(fileName).Close();
-			JsonSerializer.Serialize<List<UserEntry>>(users, options);
+			string json = JsonSerializer.Serialize<List<UserEntry>>(users, options);
+			File.WriteAllText(fileName, json);
 			}
 		}
 	}
