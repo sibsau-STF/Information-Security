@@ -7,7 +7,7 @@
     <ProjectGuid>{7F88732F-9B94-4A1E-A2F0-A3B18F89B351}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Lab_1</RootNamespace>
-    <AssemblyName>Lab_1</AssemblyName>
+    <AssemblyName>Lab1_new</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
