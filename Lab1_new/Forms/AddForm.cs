@@ -16,7 +16,7 @@ namespace Lab_1
     public partial class AddForm : Form
     {
         Base flag;
-        Form1 mainForm;
+
         private MySqlConnection connection;
         public Dictionary<int, string> userGroups { get; set; }
         private List<User> users;
@@ -34,17 +34,6 @@ namespace Lab_1
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void createButton_Click(object sender, EventArgs e)
-        {
-            if (flag == Base.BD)
-            {
-
-            }
-            else
-            {
-            }
         }
 
         private void AddForm_Load(object sender, EventArgs e)
@@ -69,7 +58,7 @@ namespace Lab_1
                     }
                 }
             }
-            else
+            else if(flag == Base.JSON && userGroups.Count == 0)
             {
                 userGroups.Add(1, "Администратор"); userGroups.Add(2, "Пользователь");
                 groupComboBox.Items.AddRange(new string[] { "Администратор", "Пользователь" });

@@ -25,24 +25,10 @@ namespace Lab_1
             main = form;
         }
 
-        private void passTextBox_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void okButton_Click(object sender, EventArgs e)
         {
             Username = usernameTextBox.Text;
             Password = passTextBox.Text;
-        }
-
-        private void AuthForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AuthForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //main.Close();
         }
     }
 }

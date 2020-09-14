@@ -37,6 +37,8 @@ namespace Lab_1
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            //на самом деле в обработчике ничего писать не пришлось
+            //все делается в форме MainForm
         }
     }
 }

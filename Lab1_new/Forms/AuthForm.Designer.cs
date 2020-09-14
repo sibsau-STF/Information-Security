@@ -68,7 +68,6 @@
             this.passTextBox.Size = new System.Drawing.Size(157, 22);
             this.passTextBox.TabIndex = 3;
             this.passTextBox.UseSystemPasswordChar = true;
-            this.passTextBox.TextChanged += new System.EventHandler(this.passTextBox_TextChanged);
             // 
             // okButton
             // 
@@ -93,8 +92,6 @@
             this.Controls.Add(this.usernameTextBox);
             this.Name = "AuthForm";
             this.Text = "Авторизация";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AuthForm_FormClosed);
-            this.Load += new System.EventHandler(this.AuthForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
