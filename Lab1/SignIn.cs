@@ -33,6 +33,12 @@ namespace Lab1
 			// get user info
 			var userData = Auth.findUser(login);
 
+			if (userData == null)
+				{
+				warningLabel.Text = "User doesn't exists";
+				return;
+				}
+
 			if ( userData.IsBanned )
 				{
 				warningLabel.Text = "User is banned";
