@@ -36,12 +36,14 @@ namespace Lab1
 			if (userData == null)
 				{
 				warningLabel.Text = "User doesn't exists";
+				LoginTries += 1;
 				return;
 				}
 
 			if ( userData.IsBanned )
 				{
 				warningLabel.Text = "User is banned";
+				LoginTries += 1;
 				return;
 				}
 
@@ -54,12 +56,14 @@ namespace Lab1
 				if ( password != repeat )
 					{
 					warningLabel.Text = "Passwords don't match";
+					LoginTries += 1;
 					return;
 					}
 
 				if ( password=="")
 					{
 					warningLabel.Text = "Password must not be empty";
+					LoginTries += 1;
 					return;
 					}
 
