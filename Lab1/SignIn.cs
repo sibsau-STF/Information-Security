@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace Lab1
 	{
 	public partial class SignIn : Form
 		{
-		BaseAuth Auth = new JsonAuth("./users.json");
+		string storageFile = "users.json";
+		BaseAuth Auth;
 		UserEntry User;
 		int LoginTries = 0;
 
@@ -33,7 +35,7 @@ namespace Lab1
 			// get user info
 			var userData = Auth.findUser(login);
 
-			if (userData == null)
+			if ( userData == null )
 				{
 				warningLabel.Text = "User doesn't exists";
 				LoginTries += 1;
@@ -60,7 +62,7 @@ namespace Lab1
 					return;
 					}
 
-				if ( password=="")
+				if ( password == "" )
 					{
 					warningLabel.Text = "Password must not be empty";
 					LoginTries += 1;
@@ -107,6 +109,16 @@ namespace Lab1
 		private void AboutProgram_Click (object sender, System.EventArgs e)
 			{
 			new About().Show();
+			}
+
+		private void SignIn_Load (object sender, EventArgs e)
+			{
+			Auth = new JsonAuth(storageFile);
+			}
+
+		private void SignIn_FormClosing (object sender, FormClosingEventArgs e)
+			{
+			Application.Exit();
 			}
 		}
 	}
