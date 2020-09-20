@@ -197,7 +197,7 @@ namespace Auth
 				users = new List<UserEntry>();
 				users.Add(new UserEntry("Admin", "", "Admin"));
 				json = JsonSerializer.Serialize<List<UserEntry>>(users, options);
-				File.WriteAllText(fileName, json);
+				File.WriteAllText(fileName, json, Encoding.Unicode);
 				}
 			else
 				{
@@ -211,7 +211,7 @@ namespace Auth
 			if ( !File.Exists(fileName) )
 				File.Create(fileName).Close();
 			string json = JsonSerializer.Serialize<List<UserEntry>>(users, options);
-			File.WriteAllText(fileName, json);
+			File.WriteAllText(fileName, json, Encoding.Unicode);
 			}
 		}
 	}

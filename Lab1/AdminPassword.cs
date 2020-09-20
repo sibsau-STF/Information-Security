@@ -20,6 +20,8 @@ namespace Lab1
 		private void button1_Click (object sender, EventArgs e)
 			{
 			Password = textBox1.Text;
+			if ( File.Exists("users.json.hash") )
+				Encoder.ApplyEncoding("users.json", Password, false);
 
 			new SignIn().Show();
 			this.Hide();
