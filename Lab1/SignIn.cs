@@ -33,12 +33,15 @@ namespace Lab1
 			string repeat = repeatBox.Text;
 
 			// get user info
-			var userData = Auth.findUser(login);
+			var responce = Auth.findUser(login);
+			var userData = responce.UserData;
 
 			if ( userData == null )
 				{
-				warningLabel.Text = "User doesn't exists";
-				LoginTries += 1;
+				if ( responce.ID == 2 )
+					LoginTries += 1;
+
+				warningLabel.Text = responce.Message;
 				return;
 				}
 

@@ -75,7 +75,7 @@ namespace Auth
 
 	public abstract class BaseAuth
 		{
-		public abstract UserEntry findUser (string login);
+		public abstract AuthResponse findUser (string login);
 
 		public abstract AuthResponse authUser (string login, string password);
 
@@ -131,11 +131,15 @@ namespace Auth
 			Instance = this;
 			}
 
-		public override UserEntry findUser (string login)
+		public override AuthResponse findUser (string login)
 			{
 			List<UserEntry> users = readAllUsers();
+			if (users == null )
+				return new AuthResponse(6, "Can't decrypt file with specified admin password");
 			UserEntry userData = users.Find(usr => usr.Login == login);
-			return userData;
+			if (userData==null)
+				return new AuthResponse(2, "User doesn't exists");
+			return new AuthResponse(0, "", userData);
 			}
 
 		public override AuthResponse authUser (string login, string password)
@@ -201,7 +205,14 @@ namespace Auth
 				}
 			else
 				{
-				users = JsonSerializer.Deserialize<List<UserEntry>>(json, options);
+				try
+					{
+					users = JsonSerializer.Deserialize<List<UserEntry>>(json, options);
+					}
+				catch ( JsonException ex )
+					{
+					return null;
+					}
 				}
 			return users;
 			}
