@@ -29,7 +29,7 @@ namespace Lab1
 			else
 				hash = getStringHash(password);
 
-			var gamma = Hasher.getGammaGenerator(hash);
+			var gamma = Hasher.getGammaGenerator(hash, !encode);
 
 			var input = encode ? fileName : fileName + ".hash";
 			var output = encode ? fileName + ".hash" : fileName;
@@ -37,11 +37,10 @@ namespace Lab1
 			File.Delete(input);
 			}
 
-		public static char[] ApplyEncoding (char[] data, char[] key, bool encode)
+		public static char[] ApplyEncoding (char[] data, byte[] key, bool encode)
 			{
-			var gamma = Hasher.getGamma(key, data.Length, !encode);
-			var sequence = gamma.ToArray();
-			char[] result = Hasher.applyGamma(data, sequence);
+			var gamma = Hasher.getGammaGenerator(key, !encode);
+			char[] result = Hasher.applyGamma(data, gamma);
 			return result;
 			}
 
@@ -59,11 +58,11 @@ namespace Lab1
 			}
 
 
-		static void applyGamma (string inputFile, string outputFile, IEnumerator<byte> gamma)
+		static void applyGamma (string inputFile, string outputFile, IEnumerable<byte> gamma)
 			{
-			string input = File.ReadAllText(inputFile, Encoding.Unicode);
-			string encoded = String.Join("", Hasher.applyGamma(input.ToArray(), gamma));
-			File.WriteAllText(outputFile, encoded, Encoding.Unicode);
+			byte[] input = File.ReadAllBytes(inputFile);
+			byte[] encoded = Hasher.applyGamma(input.ToArray(), gamma);
+			File.WriteAllBytes(outputFile, encoded);
 			}
 		}
 	}
