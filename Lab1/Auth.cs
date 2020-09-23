@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using Lab1;
 
 namespace Auth
 	{
@@ -35,19 +36,19 @@ namespace Auth
 	public class UserEntry
 		{
 		[JsonPropertyName("login")]
-		public string Login { get;  set; }
+		public string Login { get; set; }
 
 		[JsonPropertyName("password")]
 		public string Password { get; set; }
 
 		[JsonPropertyName("banned")]
-		public bool IsBanned { get;  set; }
+		public bool IsBanned { get; set; }
 
 		[JsonPropertyName("restrict")]
-		public bool RestrictPassword { get;  set; }
+		public bool RestrictPassword { get; set; }
 
 		[JsonPropertyName("rule")] // Admin, User
-		public string Rule { get;  set; }
+		public string Rule { get; set; }
 
 		public UserEntry ()
 			{
@@ -67,7 +68,7 @@ namespace Auth
 			RestrictPassword = restrict;
 			}
 
-		public UserEntry (string login, string password, string rule="User"): this(login, password, rule, false, false)
+		public UserEntry (string login, string password, string rule = "User") : this(login, password, rule, false, false)
 			{
 			}
 		}
@@ -110,12 +111,13 @@ namespace Auth
 			}
 		}
 
-	public class JsonAuth: BaseAuth
+	public class JsonAuth : BaseAuth
 		{
 		public static BaseAuth Instance { get; protected set; }
 		string fileName = "./users.json";
 		JsonSerializerOptions options =
-			new JsonSerializerOptions() { 
+			new JsonSerializerOptions()
+				{
 				AllowTrailingCommas = true,
 				IgnoreNullValues = false,
 				WriteIndented = true,
@@ -143,7 +145,9 @@ namespace Auth
 			UserEntry userData = users.Find(usr => usr.Login == user.Login);
 			if ( userData == null )
 				return new AuthResponse(2, "User doesn't exists");
-			if ( userData.Password != password )
+
+			string hash = new String(Hasher.HashData(password.ToArray()));
+			if ( userData.Password != hash )
 				return new AuthResponse(1, "Wrong password");
 
 			return new AuthResponse(0, "Successful logged", userData);
@@ -152,12 +156,13 @@ namespace Auth
 		public override AuthResponse registerUser (UserEntry user)
 			{
 			List<UserEntry> users = readAllUsers();
-			if ( users.Any(usr => usr.Login == user.Login ))
+			if ( users.Any(usr => usr.Login == user.Login) )
 				return new AuthResponse(3, "User already in system");
 
 			if ( user.RestrictPassword && !validatePassword(user.Password) )
 				return new AuthResponse(4, "Password doesn't match pattern");
 
+			user.Password = new String(Hasher.HashData(user.Password.ToArray()));
 			users.Add(user);
 			writeUsers(users);
 			return new AuthResponse(0, "Successful registered", user);
@@ -168,13 +173,14 @@ namespace Auth
 			List<UserEntry> users = readAllUsers();
 			var userData = users.Find(usr => usr.Login == newUser.Login);
 
-			if (userData == null)
+			if ( userData == null )
 				return new AuthResponse(2, "User doesn't exists");
 
 			if ( newUser.RestrictPassword && !validatePassword(newUser.Password) )
 				return new AuthResponse(4, "Password doesn't match pattern");
 
 			users.Remove(userData);
+			newUser.Password = new String(Hasher.HashData(newUser.Password.ToArray()));
 			users.Add(newUser);
 			writeUsers(users);
 			return new AuthResponse(0, "Successfuly changed data", newUser);
@@ -186,7 +192,7 @@ namespace Auth
 				File.Create(fileName).Close();
 			string json = File.ReadAllText(fileName);
 			List<UserEntry> users;
-			if ( json == "")
+			if ( json == "" )
 				{
 				users = new List<UserEntry>();
 				users.Add(new UserEntry("Admin", "", "Admin"));
