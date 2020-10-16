@@ -4,8 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using Installer;
 
 namespace Lab1
 	{
@@ -25,6 +28,18 @@ namespace Lab1
 
 			new SignIn().Show();
 			this.Hide();
+			}
+
+		private void AdminPassword_Load (object sender, EventArgs e)
+			{
+			var hash = RegistryWorker.GetSignature(SystemInfo.Information);
+			var signature = RegistryWorker.ReadSignature();
+			
+			if ( !hash.SequenceEqual(signature) )
+				{
+				var result = MessageBox.Show(this, "Wrong signature", "Error", MessageBoxButtons.OK);
+				Application.Exit();
+				}
 			}
 		}
 	}

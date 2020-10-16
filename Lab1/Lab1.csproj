@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Installer1\Installer1.csproj" />
+  </ItemGroup>
+
 </Project>

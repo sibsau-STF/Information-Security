@@ -28,7 +28,7 @@ namespace Lab1
 
 		private static void exitApp (object sender, EventArgs e)
 			{
-			if ( passwordForm.Password.Length > 0 )
+			if ( passwordForm.Password!= null && passwordForm.Password.Length > 0 )
 				Encoder.ApplyEncoding("users.json", passwordForm.Password, true);
 			}
 		}
