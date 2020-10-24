@@ -21,8 +21,21 @@ namespace ЗИ_ЛР1
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			returnResult();
+		}
+
+		void returnResult()
+		{
 			password = textBox1.Text;
 			this.DialogResult = DialogResult.OK;
+		}
+
+		private void textBox1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				returnResult();
+			}
 		}
 	}
 }

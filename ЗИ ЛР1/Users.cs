@@ -46,7 +46,7 @@ namespace ЗИ_ЛР1
 			catch
 			{
 				MessageBox.Show("Ошибка загрузки списка пользователей");
-				users.Add(new User("ADMIN", "", true));
+				users.Add(new User("ADMIN", Coding.codingPassword(""), true));
 				WriteToFile();
 			}
 		}
@@ -63,15 +63,15 @@ namespace ЗИ_ЛР1
 						MessageBox.Show("Пользователь заблокирован");
 						return null;
 					}
-					string codedPassword = codingPassword(password);
+					string codedPassword = Coding.codingPassword(password);
 					if (user.password == codedPassword)
 					{
 						if (user.isFirstAuth)
-						{
-							user.isFirstAuth = false;
+						{							
 							WriteToFile();
 							if (DialogResult.OK == new ConfirmPasswordForm().ShowDialog())
 							{
+								user.isFirstAuth = false;
 								return user;
 							}
 						}
@@ -108,7 +108,7 @@ namespace ЗИ_ЛР1
 			}
 			else
 			{
-				users.Add(new User(userName, codingPassword(password)));
+				users.Add(new User(userName, Coding.codingPassword(password)));
 				WriteToFile();
 				bindingSource.ResetBindings(false);
 			}			
@@ -140,9 +140,9 @@ namespace ЗИ_ЛР1
 				}
 				else
 				{
-					if (users[userIndex].password == codingPassword(oldPassword))
+					if (users[userIndex].password == Coding.codingPassword(oldPassword))
 					{
-						users[userIndex].password = codingPassword(newPassword);
+						users[userIndex].password = Coding.codingPassword(newPassword);
 						WriteToFile();
 						bindingSource.ResetBindings(false);
 						MessageBox.Show("Пароль успешно изменён");
@@ -178,10 +178,11 @@ namespace ЗИ_ЛР1
 			if (columnIndex == 1)
 			{
 				string password = (string)dataGridView[e.ColumnIndex, e.RowIndex].Value;
-				if (!checkPasswordPattern(password)) return;
+				users[e.RowIndex].password = Coding.codingPassword(password);
 			}
 			WriteToFile();
 		}
+
 
 		public void bindCheckBox(CheckBox checkBox)
 		{
@@ -191,13 +192,6 @@ namespace ЗИ_ЛР1
 		private void CheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			isCheckedPasswordPattern = !isCheckedPasswordPattern;
-		}
-
-		string codingPassword(string password)
-		{
-			//TODO: Сделать хэширование пароля
-			string codedPassword = password;
-			return codedPassword;
 		}
 	}
 
