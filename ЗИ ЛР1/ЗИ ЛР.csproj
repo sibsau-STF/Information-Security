@@ -57,6 +57,7 @@
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Coding.cs" />
+    <Compile Include="FileCoding.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

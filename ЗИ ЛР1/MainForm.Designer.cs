@@ -46,8 +46,8 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -224,22 +224,22 @@
 			this.panel2.Size = new System.Drawing.Size(562, 345);
 			this.panel2.TabIndex = 13;
 			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(10, 318);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(272, 17);
+			this.checkBox1.TabIndex = 14;
+			this.checkBox1.Text = "Проверка пароля на соответствие требованиям";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			// 
 			// textBox4
 			// 
 			this.textBox4.Location = new System.Drawing.Point(10, 290);
 			this.textBox4.Name = "textBox4";
 			this.textBox4.Size = new System.Drawing.Size(153, 20);
 			this.textBox4.TabIndex = 13;
-			// 
-			// checkBox1
-			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(10, 318);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(202, 17);
-			this.checkBox1.TabIndex = 14;
-			this.checkBox1.Text = "Проверка пароля на соответствие";
-			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

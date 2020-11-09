@@ -12,9 +12,10 @@ namespace ЗИ_ЛР1
 {
 	public partial class ConfirmPasswordForm : Form
 	{
-		public ConfirmPasswordForm()
+		public ConfirmPasswordForm(string messageText)
 		{
 			InitializeComponent();
+			label1.Text = messageText;
 		}
 
 		public string password = "";

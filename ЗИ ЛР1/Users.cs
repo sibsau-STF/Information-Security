@@ -33,7 +33,6 @@ namespace ЗИ_ЛР1
 				MessageBox.Show("Ошибка записи файла пользователей");
 				Application.Exit();
 			}
-			
 		}
 
 		void LoadFromFile()
@@ -63,16 +62,19 @@ namespace ЗИ_ЛР1
 						MessageBox.Show("Пользователь заблокирован");
 						return null;
 					}
-					string codedPassword = Coding.codingPassword(password);
-					if (user.password == codedPassword)
+					if (user.password == Coding.codingPassword(password))
 					{
 						if (user.isFirstAuth)
-						{							
-							WriteToFile();
-							if (DialogResult.OK == new ConfirmPasswordForm().ShowDialog())
+						{
+							var checkPasswordForm = new ConfirmPasswordForm("Подтвердите пароль");
+							if (DialogResult.OK == checkPasswordForm.ShowDialog())
 							{
-								user.isFirstAuth = false;
-								return user;
+								if (checkPasswordForm.password == password)
+								{
+									user.isFirstAuth = false;
+									WriteToFile();
+									return user;
+								}								
 							}
 						}
 						else
