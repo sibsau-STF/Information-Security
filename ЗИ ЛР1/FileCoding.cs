@@ -15,15 +15,15 @@ namespace ЗИ_ЛР1
 	{
 		public FileCoding(Form form)
 		{
-			try
-			{
-				RSAParameters publicKey = JsonConvert.DeserializeObject<RSAParameters>(File.ReadAllText("openKey.json"));
-				RSACryptoServiceProvider rSACryptoServiceProvider = new RSACryptoServiceProvider();
-				rSACryptoServiceProvider.ImportParameters(publicKey);
-				byte[] signedData = (byte[])Registry.CurrentUser.OpenSubKey("Software").OpenSubKey("Statnikov A.S.").GetValue("Signature");
-				byte[] systemInfo = Encoding.ASCII.GetBytes(new SystemInfo().getTotalInfo());
-				if (rSACryptoServiceProvider.VerifyData(systemInfo, CryptoConfig.MapNameToOID(HashAlgorithmName.MD5.Name), signedData))
-				{
+			//try
+			//{
+			//	RSAParameters publicKey = JsonConvert.DeserializeObject<RSAParameters>(File.ReadAllText("openKey.json"));
+			//	RSACryptoServiceProvider rSACryptoServiceProvider = new RSACryptoServiceProvider();
+			//	rSACryptoServiceProvider.ImportParameters(publicKey);
+			//	byte[] signedData = (byte[])Registry.CurrentUser.OpenSubKey("Software").OpenSubKey("Statnikov A.S.").GetValue("Signature");
+			//	byte[] systemInfo = Encoding.ASCII.GetBytes(new SystemInfo().getTotalInfo());
+			//	if (rSACryptoServiceProvider.VerifyData(systemInfo, CryptoConfig.MapNameToOID(HashAlgorithmName.MD5.Name), signedData))
+			//	{
 					ConfirmPasswordForm confirmPasswordForm = new ConfirmPasswordForm("Введите контрольную фразу");
 					if (confirmPasswordForm.ShowDialog() == DialogResult.OK)
 					{
@@ -41,18 +41,18 @@ namespace ЗИ_ЛР1
 							Application.Exit();
 						}
 					}
-				}
-				else
-				{
-					MessageBox.Show("Ошибка: несанкционировнное копирование");
-					Application.Exit();
-				}
-			}
-			catch
-			{
-				MessageBox.Show("Ошибка: несанкционировнное копирование");
-				Application.Exit();
-			}
+			//	}
+			//	else
+			//	{
+			//		MessageBox.Show("Ошибка: несанкционировнное копирование");
+			//		Application.Exit();
+			//	}
+			//}
+			//catch
+			//{
+			//	MessageBox.Show("Ошибка: несанкционировнное копирование");
+			//	Application.Exit();
+			//}
 		}
 
 		byte[] MD4(byte[] input)
