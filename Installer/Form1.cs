@@ -44,12 +44,12 @@ namespace Installer
 				byte[] signedData = rSACryptoServiceProvider.SignData(systemInfoData, CryptoConfig.MapNameToOID(HashAlgorithmName.MD5.Name));
 				Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("Statnikov A.S.", true).SetValue("Signature", signedData);
 
-				RSAParameters publicKey2 = JsonConvert.DeserializeObject<RSAParameters>(File.ReadAllText(Path.Combine(textBox1.Text, "openKey.json")));
-				RSACryptoServiceProvider rSACryptoServiceProvider2 = new RSACryptoServiceProvider();
-				rSACryptoServiceProvider2.ImportParameters(publicKey2);
-				byte[] signedData2 = (byte[])Registry.CurrentUser.OpenSubKey("Software").OpenSubKey("Statnikov A.S.").GetValue("Signature");
-				byte[] systemInfo2 = Encoding.ASCII.GetBytes(systemInfo.getTotalInfo());
-				MessageBox.Show(rSACryptoServiceProvider2.VerifyData(systemInfo2, CryptoConfig.MapNameToOID(HashAlgorithmName.MD5.Name), signedData).ToString());
+				//RSAParameters publicKey2 = JsonConvert.DeserializeObject<RSAParameters>(File.ReadAllText(Path.Combine(textBox1.Text, "openKey.json")));
+				//RSACryptoServiceProvider rSACryptoServiceProvider2 = new RSACryptoServiceProvider();
+				//rSACryptoServiceProvider2.ImportParameters(publicKey2);
+				//byte[] signedData2 = (byte[])Registry.CurrentUser.OpenSubKey("Software").OpenSubKey("Statnikov A.S.").GetValue("Signature");
+				//byte[] systemInfo2 = Encoding.ASCII.GetBytes(systemInfo.getTotalInfo());
+				//MessageBox.Show(rSACryptoServiceProvider2.VerifyData(systemInfo2, CryptoConfig.MapNameToOID(HashAlgorithmName.MD5.Name), signedData).ToString());
 
 				//Копирование файлов
 				FileStream fs = new FileStream(Path.Combine(textBox1.Text, "Newtonsoft.Json.dll"), FileMode.Create);
