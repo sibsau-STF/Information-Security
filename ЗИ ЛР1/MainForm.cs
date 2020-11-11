@@ -23,7 +23,7 @@ namespace ЗИ_ЛР1
 
 		private void сведенияОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Разработчик Статников А.С. БПИ17-01");
+			new AuthorInfo().Show();
 		}
 
 		private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)

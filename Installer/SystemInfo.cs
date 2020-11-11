@@ -13,6 +13,11 @@ namespace ЗИ_ЛР1
 {
 	class SystemInfo
 	{
+		public SystemInfo()
+		{
+			path = Directory.GetCurrentDirectory();
+		}
+
 		[DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
 		static extern int GetSystemMetrics(int nTypeFlag);
 

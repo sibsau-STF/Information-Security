@@ -13,6 +13,11 @@ namespace ЗИ_ЛР1
 {
 	class SystemInfo
 	{
+		public SystemInfo()
+		{
+			path = Directory.GetCurrentDirectory();
+		}
+
 		[DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
 		static extern int GetSystemMetrics(int nTypeFlag);
 
@@ -38,24 +43,30 @@ namespace ЗИ_ЛР1
 			return ((int)memoryValues.TotalVisibleMemorySize / 1024).ToString();
 		}
 
+		public string path;
+
 		string getDriveNameOfProgrammPath()
 		{
-			string currentDrive = Path.GetPathRoot(Environment.CurrentDirectory);
 			DriveInfo[] drives = DriveInfo.GetDrives();
 			foreach (DriveInfo drive in drives)
 			{
-				if (currentDrive == drive.Name)
+				if (Path.GetPathRoot(path) == drive.Name && drive.IsReady)
 					if (drive.VolumeLabel != "")
 						return drive.VolumeLabel;
 					else
 						return drive.Name;
 			}
-			return "Ошибка сканирования дисков";
+			return "Ошибка сканирования диска";
 		}
 
 		public string getTotalInfo()
 		{
 			return getMouseButtonCount() + " " + getHeightOfScreen() + " " + getMemoryCount() + " " + getDriveNameOfProgrammPath();
+		}
+
+		public string getTotalInfoToUser()
+		{
+			return "Количество кнопок мыши: " + getMouseButtonCount() + "\r\nВысота экрана: " + getHeightOfScreen() + "\r\nКоличество оперативной памяти: " + getMemoryCount() + "\r\nМетка тома: " + getDriveNameOfProgrammPath();
 		}
 
 		public string getTotalInfoHash()

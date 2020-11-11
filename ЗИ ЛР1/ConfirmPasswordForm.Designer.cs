@@ -70,6 +70,7 @@
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.textBox1);
 			this.Name = "ConfirmPasswordForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form2";
 			this.ResumeLayout(false);
 			this.PerformLayout();

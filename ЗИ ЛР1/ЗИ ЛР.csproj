@@ -60,6 +60,12 @@
     <Compile Include="AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuthorInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorInfo.Designer.cs">
+      <DependentUpon>AuthorInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coding.cs" />
     <Compile Include="FileCoding.cs" />
     <Compile Include="MainForm.cs">
@@ -80,6 +86,9 @@
     <Compile Include="Users.cs" />
     <EmbeddedResource Include="AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorInfo.resx">
+      <DependentUpon>AuthorInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmPasswordForm.resx">
       <DependentUpon>ConfirmPasswordForm.cs</DependentUpon>

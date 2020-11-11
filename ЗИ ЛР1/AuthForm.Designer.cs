@@ -81,6 +81,7 @@
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.button1);
 			this.Name = "AuthForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "AuthForm";
 			this.Load += new System.EventHandler(this.AuthForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AuthForm_KeyDown);

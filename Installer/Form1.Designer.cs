@@ -37,9 +37,9 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(360, 170);
+			this.button1.Location = new System.Drawing.Point(360, 157);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(153, 23);
+			this.button1.Size = new System.Drawing.Size(153, 36);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Установить";
 			this.button1.UseVisualStyleBackColor = true;
@@ -82,6 +82,7 @@
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.button1);
 			this.Name = "Form1";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Установщик";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.ResumeLayout(false);
