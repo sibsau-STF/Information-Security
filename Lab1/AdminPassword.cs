@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
 using Installer;
+using Newtonsoft.Json;
 
 namespace Lab1
 	{
@@ -32,12 +34,27 @@ namespace Lab1
 
 		private void AdminPassword_Load (object sender, EventArgs e)
 			{
-			var hash = RegistryWorker.GetSignature(SystemInfo.Information);
-			var signature = RegistryWorker.ReadSignature();
-			
-			if ( !hash.SequenceEqual(signature) )
+			try
 				{
-				var result = MessageBox.Show(this, "Wrong signature", "Error", MessageBoxButtons.OK);
+				RSAParameters publicKey = JsonConvert.DeserializeObject<RSAParameters>(File.ReadAllText("openKey.key"));
+				RSACryptoServiceProvider rSACryptoServiceProvider = new RSACryptoServiceProvider();
+				rSACryptoServiceProvider.ImportParameters(publicKey);
+				byte[] signedData = RegistryWorker.ReadSignature();
+				byte[] systemInfo = RegistryWorker.GetSignature(SystemInfo.Information);
+
+				if ( rSACryptoServiceProvider.VerifyData(systemInfo, CryptoConfig.MapNameToOID(HashAlgorithmName.SHA1.Name), signedData) )
+					{
+					return;
+					}
+				else
+					{
+					MessageBox.Show("ERROR: program safety corrupted");
+					Application.Exit();
+					}
+				}
+			catch
+				{
+				MessageBox.Show("ERROR: program safety corrupted");
 				Application.Exit();
 				}
 			}
