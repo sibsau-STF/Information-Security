@@ -10,34 +10,48 @@ namespace Lab1
 		static int sumPassword (char[] password) => password
 								.Aggregate<char, int>(0, (acc, c) => ( acc + c ) % 256);
 
-		public static char[] applyGamma (char[] password, char[] gamma)
+		public static char[] applyGamma (char[] data, IEnumerable<byte> gamma)
 			{
-			if ( password.Length != gamma.Length )
-				return null;
+			Encoding Encoding = Encoding.Unicode;
+			var incoming = Encoding.GetBytes(data);
+			char[] buffer = new char[data.Length];
+			byte[] temp = new byte[2];
+			var iter = gamma.GetEnumerator();
+			for ( int i = 0; i < data.Length; i++ )
+				{
+				iter.MoveNext();
+				temp[0] = (byte)( incoming[2 * i] + iter.Current );
+				iter.MoveNext();
+				temp[1] = (byte)( incoming[2 * i + 1] + iter.Current );
+				buffer[i] = Encoding.GetChars(temp)[0];
+				}
 
-			char[] buffer = new char[gamma.Length];
-			for ( int i = 0; i < password.Length; i++ )
-				buffer[i] = (char)( ( password[i] + gamma[i] ) % 256 );
 			return buffer;
 			}
 
-		public static byte applyGamma (byte data, byte gamma)
+		public static byte[] applyGamma (byte[] data, IEnumerable<byte> gamma)
 			{
-			return (byte)( data + gamma );
+			byte[] buffer = new byte[data.Length];
+			var iter = gamma.GetEnumerator();
+			for ( int i = 0; i < data.Length; i++ )
+				{
+				iter.MoveNext();
+				buffer[i] = (byte)( data[i] + iter.Current );
+				}
+			return buffer;
+			}
+
+		public static IEnumerable<byte> getGammaGenerator (byte[] key, bool revert = false)
+			{
+			int seed = sumPassword(key.Select(b => (char)b).ToArray());
+			var Randomizer = new Random(seed);
+			while ( true )
+				yield return revert ? (byte)( 256 - Randomizer.Next(256) ) : (byte)Randomizer.Next(256);
 			}
 
 		public static char[] HashData (char[] data)
 			{
-			int seed = sumPassword(data);
-			var Randomizer = new Random(seed);
-			var gamma = data.Select(c => (char)Randomizer.Next(256)).ToArray();
-			return applyGamma(data, gamma);
-			}
-
-		public static byte HashByte (byte data)
-			{
-			var Randomizer = new Random(data);
-			byte gamma = (byte)Randomizer.Next(256);
+			var gamma = getGammaGenerator(data.Select(c => (byte)c).ToArray());
 			return applyGamma(data, gamma);
 			}
 		}

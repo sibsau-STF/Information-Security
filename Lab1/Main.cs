@@ -78,11 +78,6 @@ namespace Lab1
 				}
 			}
 
-		private void Main_FormClosed (object sender, FormClosedEventArgs e)
-			{
-			Application.Exit();
-			}
-
 		private void banButton_Click (object sender, EventArgs e)
 			{
 			using ( BanUser dlg = new BanUser(AuthModel) )
@@ -93,6 +88,11 @@ namespace Lab1
 					DisplayUsers();
 					}
 				}
+			}
+
+		private void Main_FormClosing (object sender, FormClosingEventArgs e)
+			{
+			Application.Exit();
 			}
 		}
 	}

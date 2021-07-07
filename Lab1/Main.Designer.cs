@@ -146,7 +146,7 @@
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.Name = "Main";
 			this.Text = "Main";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.mainPanel.ResumeLayout(false);
 			this.mainPanel.PerformLayout();

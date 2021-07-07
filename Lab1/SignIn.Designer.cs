@@ -155,7 +155,9 @@
 			this.Controls.Add(this.loginPanel);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "SignIn";
-			this.Text = "Form1";
+			this.Text = "Sign In";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignIn_FormClosing);
+			this.Load += new System.EventHandler(this.SignIn_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.loginPanel.ResumeLayout(false);
